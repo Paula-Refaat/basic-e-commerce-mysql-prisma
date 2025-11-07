@@ -53,3 +53,8 @@ export const login = async (
   const token = jwt.sign({ userId: user.id }, JWT_SECRET);
   res.json({ user, token });
 };
+
+export const me = async (req: Request, res: Response) => {
+  console.log("sdffsdsfdsdffsd");
+  res.json(req.user);
+};
