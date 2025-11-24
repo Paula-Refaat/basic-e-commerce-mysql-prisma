@@ -7,3 +7,12 @@ export const SignUpSchema = z.object({
   address: z.string(),
   phone: z.string(),
 });
+
+export const AddressSchema = z.object({
+  lineOne: z.string(),
+  lineTwo: z.string().nullable().optional(),
+  city: z.string(),
+  state: z.string(),
+  country: z.string(),
+  pinCode: z.string().min(6),
+});
