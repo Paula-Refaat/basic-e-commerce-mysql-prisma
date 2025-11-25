@@ -22,3 +22,6 @@ export const UpdateUserSchema = z.object({
   defaultShippingAddress: z.number().optional(),
   defaultBillingAddress: z.number().optional(),
 });
+export const updateRoleUserSchema = z.object({
+  role: z.string().nonempty(),
+});

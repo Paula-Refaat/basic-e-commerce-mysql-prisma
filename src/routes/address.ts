@@ -1,4 +1,4 @@
-import { listAddress } from "./../controllers/users";
+import { listAddress } from "../controllers/users";
 import { Router } from "express";
 import { errorHandler } from "../error-handler";
 import authMiddleware from "../middlewares/auth";
