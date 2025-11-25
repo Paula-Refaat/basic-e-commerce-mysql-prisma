@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -40,9 +41,9 @@ model user {
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  Addresses   Address[]
+  Addresses Address[]
   CartItems CartItem[]
-  Orders     Order[]
+  Orders    Order[]
 
   @@map("users")
 }
@@ -64,16 +65,17 @@ model Address {
 }
 
 model Product {
-  id           Int            @id @default(autoincrement())
-  name         String
-  description  String         @db.Text
-  price        Decimal
-  tags         String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  CartItems    CartItem[]
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String         @db.Text
+  price         Decimal
+  tags          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  CartItems     CartItem[]
   OrderProducts OrderProduct[]
 
+  @@fulltext([name, description,tags])
   @@map("products")
 }
 
@@ -91,14 +93,14 @@ model CartItem {
 }
 
 model Order {
-  id           Int            @id @default(autoincrement())
-  user         user           @relation(fields: [userId], references: [id])
-  userId       Int
-  netAmount    Decimal
-  address      String
-  status       OrderEventStatus @default(PENDING)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id            Int              @id @default(autoincrement())
+  user          user             @relation(fields: [userId], references: [id])
+  userId        Int
+  netAmount     Decimal
+  address       String
+  status        OrderEventStatus @default(PENDING)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
   OrderProducts OrderProduct[]
   OrderEvents   OrderEvent[]
 
