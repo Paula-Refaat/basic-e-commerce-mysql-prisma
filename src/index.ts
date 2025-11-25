@@ -21,6 +21,22 @@ export const prismaClient = new PrismaClient({
       },
     },
   },
+  result: {
+    address: {
+      formattedAddress: {
+        needs: {
+          lineOne: true,
+          lineTwo: true,
+          city: true,
+          country: true,
+          pinCode: true,
+        },
+        compute(data) {
+          return `${data.lineOne}, ${data.lineTwo}, ${data.city}, ${data.country} - ${data.pinCode}`;
+        },
+      },
+    },
+  },
 });
 app.use(errorMiddleware);
 app.listen(PORT, () => {
